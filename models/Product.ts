@@ -1,4 +1,4 @@
-import { Schema, model as createModel, Document, BooleanExpressionOperator } from 'mongoose';
+import { Schema, model as createModel, Document } from 'mongoose';
 import { Product } from '../interfaces/Product';
 import Mongo from './Model';
 

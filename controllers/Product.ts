@@ -19,7 +19,7 @@ export default class ProductController extends Controller<Product> {
               if('error' in data) return res.status(400).json(data);
               return res.json(data);
          } catch (error) {
-              return res.status(500).json({ error: this.errors.internal });
+              return res.status(400).json({ error: 'Email has exists.' });
          }
     }
 
@@ -29,7 +29,7 @@ export default class ProductController extends Controller<Product> {
             if(!data) {
                 return res.status(404).json({ error: this.errors.notFound });
             }
-            return res.json(data);
+            return res.status(201).json(data);
         } catch (error) {
             return res.status(500).json({ error: this.errors.internal });
         }

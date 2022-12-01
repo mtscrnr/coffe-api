@@ -1,32 +1,25 @@
-import express, { Router } from 'express';
+import express from 'express';
+import cookieParser from 'cookie-parser';
 import productRouter from '../routers/product';
-import csrf from 'csrf';
 import connectToDatabase from './connection';
-
+import bodyParser from 'body-parser';
+import helmet from 'helmet';
+import userRouter from '../routers/user';
 export default class App {
     public app: express.Application;
 
     constructor() {
         this.app = express();
-        this.app.disable('x-powered-by');
-        this.app.use(express.json());
-        this.csrfProtection();
+        this.app.use(helmet());
+        this.app.use(bodyParser.json());
+        this.app.use(bodyParser.urlencoded({ extended: true }));
+        this.app.use(cookieParser());
         this.routes();
-        
     }
 
     private routes(): void {
         this.app.use('/product', productRouter);
-    }
-
-    private csrfProtection(): void {
-        const tokens = new csrf();
-        const secret = tokens.secretSync();
-        const token = tokens.create(secret);
-        this.app.use((_req, res, next) => {
-            res.cookie('XSRF-TOKEN', token);
-            next();
-        });
+        this.app.use('/user', userRouter);
     }
 
     public startServer(port: string | number): void {
