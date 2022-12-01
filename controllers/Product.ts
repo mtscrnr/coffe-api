@@ -39,10 +39,8 @@ export default class ProductController extends Controller<Product> {
         try {
             const { id } = req.params;
             const data = await this.product.update(id, req.body);
-            if (!data) {
-                 return res.status(404).json({ error: this.errors.notFound });
-            }
-            return res.json(data);
+
+            return res.json(data!);
         } catch (error) {
             return res.status(500).json({ error: this.errors.internal });
         }

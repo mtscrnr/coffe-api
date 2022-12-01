@@ -16,10 +16,6 @@ export default class ProductService extends Service<Product> {
     }
 
     public async update(id: string, obj: Product): Promise<Product | null  | ServiceError> {
-        const parsed = productSchema.safeParse(obj);
-        if (!parsed.success) return {
-            error: parsed.error
-        };
-        return super.update(id, obj);
+        return this.model.update(id, obj);
     }
 }

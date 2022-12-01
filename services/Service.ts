@@ -1,3 +1,4 @@
+import { UpdateQuery } from 'mongoose';
 import { ZodError } from 'zod';
 import Model from '../models/Model';
 
@@ -25,7 +26,7 @@ export default abstract class Service<T> {
   }
 
   public async update(id: string, obj: T): Promise<T | null | ServiceError> {
-    return this.model.update(id, obj);
+    return this.model.update(id, obj as UpdateQuery<T>);
   }
 
   public async delete(id: string): Promise<T | null | ServiceError> {
