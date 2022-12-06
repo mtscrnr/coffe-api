@@ -1,4 +1,5 @@
 import ProductModel from "../models/Product";
+import sanitize from 'mongo-sanitize';
 import { Product, productSchema} from "../interfaces/Product";
 import Service, { ServiceError } from "./Service";
 
@@ -16,6 +17,7 @@ export default class ProductService extends Service<Product> {
     }
 
     public async update(id: string, obj: Product): Promise<Product | null  | ServiceError> {
+        const newObj = sanitize(obj);
         return this.model.update(id, obj);
     }
 }

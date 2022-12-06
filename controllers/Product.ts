@@ -17,9 +17,11 @@ export default class ProductController extends Controller<Product> {
         try {
               const data = await this.product.create(req.body);
               if('error' in data) return res.status(400).json(data);
+              console.log(req.user);
+              
               return res.json(data);
          } catch (error) {
-              return res.status(400).json({ error: 'Email has exists.' });
+              return res.status(400).json({ error: this.errors.internal });
          }
     }
 

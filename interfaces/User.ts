@@ -19,7 +19,7 @@ export const userSchema = z.object({
         invalid_type_error: 'password must be a string.'
     }).min(6, {
         message: 'password must be at least 6 character long.'
-    }),
+    }).optional(),
     active: z.boolean().optional(),
     role: z.string().optional(),
 });
