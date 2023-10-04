@@ -13,7 +13,7 @@
     "mongo-sanitize": "^1.1.0",
     "mongoose": "^6.7.4",
     "ts-node": "^10.9.1",
-    "zod": "^3.19.1"
+    "zod": "^3.22.3"
   },
   "name": "coffe-shop",
   "version": "1.0.0",
